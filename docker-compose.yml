@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  nextjs:
+    image: ghcr.io/lycoon/scriptio-app:latest
+    build: ./
+    env_file: .env
+    ports:
+      - 5000:3000
