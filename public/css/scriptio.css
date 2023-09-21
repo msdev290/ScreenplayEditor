@@ -27,140 +27,140 @@ Originally developed by John August - johnaugust.com
 */
 
 .ProseMirror:focus {
-    /* Prevent outline from appearing when focused on screenplay */
-    outline: none;
+  /* Prevent outline from appearing when focused on screenplay */
+  outline: none;
 }
 
 .ProseMirror {
-    position: absolute;
-    width: 586px;
-    min-height: 1100px;
+  position: absolute;
+  width: 586px;
+  min-height: 1100px;
 
-    /* Screenplay margins */
-    margin-left: 1.5in;
-    margin-right: 0.95in;
-    padding-block: 1in;
+  /* Screenplay margins */
+  margin-left: 1.5in;
+  margin-right: 0.95in;
+  padding-block: 1in;
 }
 
 .ProseMirror p,
 .ProseMirror span {
-    /* Default screenplay text attributes */
-    font-family: "Courier Prime", monospace;
-    font-size: 12pt;
-    text-align: left;
-    letter-spacing: -0.4px !important;
-    line-height: 17px !important;
-    margin-bottom: 17px;
-    color: var(--editor-text);
+  /* Default screenplay text attributes */
+  font-family: "Courier Prime", monospace;
+  font-size: 12pt;
+  text-align: left;
+  letter-spacing: -0.4px !important;
+  line-height: 17px !important;
+  margin-bottom: 17px;
+  color: var(--editor-text);
 }
 
 /* Editor styles */
 span.bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 span.italic {
-    font-style: italic;
+  font-style: italic;
 }
 
 span.underline {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* User settings */
 .highlight-on-hover .ProseMirror > p:hover {
-    background-color: var(--editor-element-hover);
-    border-radius: 8px;
+  background-color: var(--editor-element-hover);
+  border-radius: 8px;
 }
 
 .scene-background .scene {
-    background-color: var(--editor-scene);
+  background-color: var(--editor-scene);
 }
 
 /* Editor elements */
 .action {
-    line-height: 17px !important;
-    text-align: justify;
+  line-height: 17px !important;
+  text-align: justify;
 }
 
 .scene {
-    background-color: none;
-    width: 100%;
-    padding-top: 2px;
-    padding-left: 4px;
-    display: inline-block;
-    text-transform: uppercase;
-    font-weight: bold;
-    line-height: 20px !important;
-    counter-increment: scenenumber;
+  background-color: none;
+  width: 100%;
+  padding-top: 2px;
+  padding-left: 4px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 20px !important;
+  counter-increment: scenenumber;
 }
 
 .scene::before {
-    content: counter(scenenumber) ".";
-    position: absolute;
-    margin-left: -75px;
+  content: counter(scenenumber) ".";
+  position: absolute;
+  margin-left: -75px;
 }
 
 /* Dialogue */
 .dialogue {
-    padding-inline: 1.2in !important;
+  padding-inline: 1.2in !important;
 }
 
 .dialogue + .parenthetical {
-    margin-top: -17px !important;
+  margin-top: -17px !important;
 }
 
 .character {
-    padding-left: 2.2in !important;
-    text-transform: uppercase;
+  padding-left: 2.2in !important;
+  text-transform: uppercase;
 }
 
 .character + .parenthetical,
 .character + .dialogue {
-    margin-top: -17px !important;
+  margin-top: -17px !important;
 }
 
 /* Parenthetical */
 .parenthetical {
-    padding-left: 1.9in !important;
-    padding-right: 2.1in !important;
-    margin-bottom: 0 !important;
+  padding-left: 1.9in !important;
+  padding-right: 2.1in !important;
+  margin-bottom: 0 !important;
 }
 
 .parenthetical::before {
-    content: "(";
+  content: "(";
 }
 
 .parenthetical::after {
-    content: ")";
+  content: ")";
 }
 
 /* Transition */
 .transition {
-    text-transform: uppercase;
-    text-align: right !important;
+  text-transform: uppercase;
+  text-align: right !important;
 }
 
 .transition::after {
-    content: ":";
+  content: ":";
 }
 
 .section {
-    text-transform: uppercase;
-    text-align: center !important;
-    text-decoration: underline;
-    line-height: 20px !important;
-    counter-increment: actnumber;
+  text-transform: uppercase;
+  text-align: center !important;
+  text-decoration: underline;
+  line-height: 20px !important;
+  counter-increment: actnumber;
 }
 
 /* Note */
 .note {
-    background-color: var(--editor-notes-color); /* a: 0.226 */
-    padding-inline: 8px;
-    padding-block: 4px;
+  background-color: var(--editor-notes-color); /* a: 0.226 */
+  padding-inline: 8px;
+  padding-block: 4px;
 
-    border-style: dashed;
-    border-width: 2px;
-    border-color: var(--editor-notes-color); /* a: 0.226 */
-    border-radius: 10px;
+  border-style: dashed;
+  border-width: 2px;
+  border-color: var(--editor-notes-color); /* a: 0.226 */
+  border-radius: 10px;
 }

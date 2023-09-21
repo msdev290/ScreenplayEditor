@@ -14,58 +14,66 @@ import layout from "../components/utils/Layout.module.css";
 import { ScreenplayContextProvider } from "@src/context/ScreenplayContext";
 
 const DesktopNavbar = () => {
-    return (
-        <div data-tauri-drag-region className="titlebar">
-            <div className="titlebar-button" id="titlebar-minimize">
-                <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize" />
-            </div>
-            <div className="titlebar-button" id="titlebar-maximize">
-                <img src="https://api.iconify.design/mdi:window-maximize.svg" alt="maximize" />
-            </div>
-            <div className="titlebar-button" id="titlebar-close">
-                <img src="https://api.iconify.design/mdi:close.svg" alt="close" />
-            </div>
-        </div>
-    );
+  return (
+    <div data-tauri-drag-region className="titlebar">
+      <div className="titlebar-button" id="titlebar-minimize">
+        <img
+          src="https://api.iconify.design/mdi:window-minimize.svg"
+          alt="minimize"
+        />
+      </div>
+      <div className="titlebar-button" id="titlebar-maximize">
+        <img
+          src="https://api.iconify.design/mdi:window-maximize.svg"
+          alt="maximize"
+        />
+      </div>
+      <div className="titlebar-button" id="titlebar-close">
+        <img src="https://api.iconify.design/mdi:close.svg" alt="close" />
+      </div>
+    </div>
+  );
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const [pageLoading, setPageLoading] = useState<boolean>(false);
-    const router = useRouter();
-    const isDesktop = useDesktop();
+  const [pageLoading, setPageLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const isDesktop = useDesktop();
 
-    useEffect(() => {
-        const handleStart = () => {
-            setPageLoading(true);
-        };
-        const handleComplete = () => {
-            setPageLoading(false);
-        };
+  useEffect(() => {
+    const handleStart = () => {
+      setPageLoading(true);
+    };
+    const handleComplete = () => {
+      setPageLoading(false);
+    };
 
-        router.events.on("routeChangeStart", handleStart);
-        router.events.on("routeChangeComplete", handleComplete);
-        router.events.on("routeChangeError", handleComplete);
-    }, [router]);
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeError", handleComplete);
+  }, [router]);
 
-    return (
-        <SWRConfig
-            value={{
-                fetcher: fetchJson,
-                onSuccess: () => {},
-                onError: (err) => {
-                    console.error(err);
-                },
-            }}
-        >
-            <UserContextProvider>
-                <ScreenplayContextProvider>
-                    <ThemeProvider attribute="class" defaultTheme="dark">
-                        <div className={layout.main}>{pageLoading ? <Loading /> : <Component {...pageProps} />}</div>
-                    </ThemeProvider>
-                </ScreenplayContextProvider>
-            </UserContextProvider>
-        </SWRConfig>
-    );
+  return (
+    <SWRConfig
+      value={{
+        fetcher: fetchJson,
+        onSuccess: () => {},
+        onError: (err) => {
+          console.error(err);
+        },
+      }}
+    >
+      <UserContextProvider>
+        <ScreenplayContextProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            <div className={layout.main}>
+              {pageLoading ? <Loading /> : <Component {...pageProps} />}
+            </div>
+          </ThemeProvider>
+        </ScreenplayContextProvider>
+      </UserContextProvider>
+    </SWRConfig>
+  );
 }
 
 export default MyApp;

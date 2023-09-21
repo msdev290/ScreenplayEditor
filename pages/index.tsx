@@ -8,6 +8,9 @@ import { UserContext } from "@src/context/UserContext";
 import { useDesktop, useUser } from "@src/lib/utils/hooks";
 import { CookieUser } from "@src/lib/utils/types";
 import DesktopHomePageContainer from "@components/home/DesktopHomePageContainer";
+import { AccessAlarm, ThreeDRotation } from "@mui/icons-material";
+
+import "@blocknote/core/style.css";
 
 type Props = {
   user: CookieUser | undefined;
