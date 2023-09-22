@@ -221,6 +221,8 @@ const EditorAndSidebar = ({ project }: Props) => {
     },
   });
 
+  console.log("editorView1:", editorView);
+
   editorView?.setOptions({
     autofocus: "end",
     editorProps: {
@@ -280,6 +282,8 @@ const EditorAndSidebar = ({ project }: Props) => {
       },
     },
   });
+
+  console.log("editorView2:", editorView);
 
   const setActiveTab = (node: string, applyStyle = true) => {
     updateSelectedTab(tabs.indexOf(node));
