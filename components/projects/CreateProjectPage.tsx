@@ -22,7 +22,9 @@ const CreateProjectPage = ({ setIsCreating }: Props) => {
     const isDesktop = useDesktop();
 
     const [formInfo, setFormInfo] = useState<FormInfoType | null>(null);
-    const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
+    const [selectedFile, setSelectedFile] = useState<File | undefined>(
+        undefined
+    );
 
     const exitCreating = () => {
         setIsCreating(false);
@@ -38,6 +40,7 @@ const CreateProjectPage = ({ setIsCreating }: Props) => {
 
         const body: ProjectCreation = {
             title: e.target.title.value,
+            writtenBy: e.target.writtenBy.value,
             description: e.target.description.value,
             saveMode: SaveMode.CLOUD, //TODO: Add save mode to form
         };
@@ -63,25 +66,43 @@ const CreateProjectPage = ({ setIsCreating }: Props) => {
                 <FormHeader title={"Create project"} formInfo={formInfo} />
 
                 <div className={form.elements}>
-                    <div className={form.element}>
-                        <p className={form.element_title}>Title</p>
-                        <input name="title" className={form.input} onChange={resetFormInfo} required />
-                    </div>
-                    <div className={form.element}>
-                        <p className={form.element_title}>
-                            Description - <i>optional</i>
-                        </p>
+                    <label className="input-group input-group-vertical">
+                        <span className="text-xl">Title</span>
+                        <input
+                            name="title"
+                            className={" input input-bordered"}
+                            onChange={resetFormInfo}
+                            required
+                        />
+                    </label>
+                    <label className="input-group input-group-vertical">
+                        <span className="text-xl">Written By</span>
+                        <input
+                            name="writtenBy"
+                            className={" input input-bordered"}
+                            onChange={resetFormInfo}
+                            required
+                        />
+                    </label>
+
+                    <label className="input-group input-group-vertical">
+                        <span className="text-xl">
+                            Description-<i> optional</i>
+                        </span>
                         <textarea
                             name="description"
-                            className={join(form.input, form.input_desc)}
+                            className="input input-bordered h-40"
                             onChange={resetFormInfo}
                         />
-                    </div>
+                    </label>
                     <div className={form.element}>
-                        <p className={form.element_title}>
+                        <p className="text-xl">
                             Poster - <i>optional</i>
                         </p>
-                        <UploadButton setSelectedFile={setSelectedFile} selectedFile={selectedFile} />
+                        <UploadButton
+                            setSelectedFile={setSelectedFile}
+                            selectedFile={selectedFile}
+                        />
                     </div>
                 </div>
 

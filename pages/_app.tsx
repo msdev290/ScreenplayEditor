@@ -57,7 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <SWRConfig
       value={{
         fetcher: fetchJson,
-        onSuccess: () => {},
+        onSuccess: () => { },
         onError: (err) => {
           console.error(err);
         },
@@ -65,7 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     >
       <UserContextProvider>
         <ScreenplayContextProvider>
-          <ThemeProvider attribute="class" defaultTheme="dark">
+          <ThemeProvider attribute="class" defaultTheme="light">
             <div className={layout.main}>
               {pageLoading ? <Loading /> : <Component {...pageProps} />}
             </div>

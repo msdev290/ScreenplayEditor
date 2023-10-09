@@ -27,140 +27,248 @@ Originally developed by John August - johnaugust.com
 */
 
 .ProseMirror:focus {
-  /* Prevent outline from appearing when focused on screenplay */
-  outline: none;
+    /* Prevent outline from appearing when focused on screenplay */
+    outline: none;
 }
 
 .ProseMirror {
-  position: absolute;
-  width: 586px;
-  min-height: 1100px;
-
-  /* Screenplay margins */
-  margin-left: 1.5in;
-  margin-right: 0.95in;
-  padding-block: 1in;
+    position: absolute;
+    width: 586px;
+    min-height: 1100px;
+    width: 100%;
+    /* Screenplay margins */
+    /* margin-left: 1.5in;
+  margin-right: 0.95in; */
+    padding-block: 1in;
 }
 
-.ProseMirror p,
+.ProseMirror div,
 .ProseMirror span {
-  /* Default screenplay text attributes */
-  font-family: "Courier Prime", monospace;
-  font-size: 12pt;
-  text-align: left;
-  letter-spacing: -0.4px !important;
-  line-height: 17px !important;
-  margin-bottom: 17px;
-  color: var(--editor-text);
+    /* Default screenplay text attributes */
+    font-family: "Courier Prime", monospace;
+    font-size: 12pt;
+    text-align: left;
+    letter-spacing: -0.4px !important;
+    line-height: 30px !important;
+    color: var(--editor-text);
 }
 
 /* Editor styles */
 span.bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 span.italic {
-  font-style: italic;
+    font-style: italic;
 }
 
 span.underline {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* User settings */
 .highlight-on-hover .ProseMirror > p:hover {
-  background-color: var(--editor-element-hover);
-  border-radius: 8px;
+    border-radius: 8px;
 }
 
 .scene-background .scene {
-  background-color: var(--editor-scene);
 }
 
 /* Editor elements */
 .action {
-  line-height: 17px !important;
-  text-align: justify;
+    line-height: 17px !important;
+    text-align: justify;
+    margin-left: 1.5in;
+    margin-right: 1in;
+    width: 6in;
 }
 
 .scene {
-  background-color: none;
-  width: 100%;
-  padding-top: 2px;
-  padding-left: 4px;
-  display: inline-block;
-  text-transform: uppercase;
-  font-weight: bold;
-  line-height: 20px !important;
-  counter-increment: scenenumber;
+    width: 100%;
+    margin-right: 1in;
+    margin-left: 1.5in;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 20px !important;
+    counter-increment: scenenumber;
 }
 
-.scene::before {
-  content: counter(scenenumber) ".";
-  position: absolute;
-  margin-left: -75px;
+.scene-menu {
+    min-width: 135px;
 }
 
 /* Dialogue */
 .dialogue {
-  padding-inline: 1.2in !important;
+    width: 3.3in;
+    margin-left: 2.9in;
+    margin-right: 2.3in;
 }
 
 .dialogue + .parenthetical {
-  margin-top: -17px !important;
+    margin-top: -17px !important;
 }
 
 .character {
-  padding-left: 2.2in !important;
-  text-transform: uppercase;
+    /* padding-left: 2.2in !important; */
+    margin-left: 4.2in;
+    margin-right: 1in;
+    width: 3.3in;
+    text-transform: uppercase;
 }
 
 .character + .parenthetical,
 .character + .dialogue {
-  margin-top: -17px !important;
+    margin-top: -17px !important;
 }
 
 /* Parenthetical */
 .parenthetical {
-  padding-left: 1.9in !important;
-  padding-right: 2.1in !important;
-  margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    display: flex;
+    margin-left: 3.6in;
+    margin-right: 2.9in;
+    width: 2in;
 }
 
 .parenthetical::before {
-  content: "(";
+    content: "(";
 }
 
 .parenthetical::after {
-  content: ")";
+    content: ")";
 }
 
 /* Transition */
 .transition {
-  text-transform: uppercase;
-  text-align: right !important;
+    text-transform: uppercase;
+    margin-left: 6in;
+    margin-right: 1in;
+    width: 1.5in;
 }
 
-.transition::after {
-  content: ":";
+.transition > div {
+    text-align: right !important;
 }
 
 .section {
-  text-transform: uppercase;
-  text-align: center !important;
-  text-decoration: underline;
-  line-height: 20px !important;
-  counter-increment: actnumber;
+    text-transform: uppercase;
+    text-align: center !important;
+    text-decoration: underline;
+    line-height: 20px !important;
+    counter-increment: actnumber;
 }
 
 /* Note */
 .note {
-  background-color: var(--editor-notes-color); /* a: 0.226 */
-  padding-inline: 8px;
-  padding-block: 4px;
+    border-style: dashed;
+    border-width: 2px;
+    border-color: var(--editor-notes-color);
+    border-radius: 10px;
+    margin-left: 1.5in;
+    margin-right: 1in;
+    width: 6in;
+}
 
-  border-style: dashed;
-  border-width: 2px;
-  border-color: var(--editor-notes-color); /* a: 0.226 */
-  border-radius: 10px;
+.text {
+    margin-left: 1.5in;
+    margin-right: 1in;
+    width: 6in;
+}
+
+.shot {
+    margin-left: 1.5in;
+    margin-right: 1in;
+    width: 6in;
+}
+
+.tippy-sideMenu {
+    border-radius: 4px;
+    width: 240px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 5px 5px 0px rgb(0 0 0 / 0.1),
+        5px 5px 5px -5px rgb(0 0 0 / 0.1);
+}
+
+.tippy-sideMenu button {
+    width: 100%;
+    text-align: left;
+    color: rgb(255, 255, 255);
+}
+
+.tippy-sideMenu button:focus {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.tippy-sideMenu-item {
+    transition: all 200ms;
+    color: black;
+}
+
+[data-case="upper"] {
+    text-transform: uppercase;
+}
+
+.note,
+.shot,
+.text {
+    text-transform: uppercase;
+}
+
+[data-revision="true"] div {
+    color: blue;
+    position: relative;
+}
+
+[data-revision="true"] div::after {
+    position: absolute;
+    right: 0;
+    content: "*";
+}
+
+[data-expand="1"] {
+    padding-left: 0.4in;
+}
+
+[data-expand="2"] {
+    padding-left: 0.8in;
+}
+
+.add-comment {
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s;
+}
+
+.add-comment:hover {
+    opacity: 100;
+}
+
+.add-comment button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.add-comment:hover {
+    opacity: 100;
+}
+
+.search-result {
+    background-color: var(--secondary);
+    /* border: 1px solid var(--primary-hover); */
+}
+
+.search-div > div > p {
+    border-bottom: 1px solid var(--primary-hover);
+    padding: 10px 20px;
+}
+
+.my-comment {
+    background-color: rgba(200, 200, 25, 0.5);
 }

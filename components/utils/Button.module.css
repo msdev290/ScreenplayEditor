@@ -10,16 +10,19 @@
     white-space: nowrap;
     cursor: pointer;
 
+    color: var(--secondary);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    transition: all 400ms;
     gap: 8px;
 }
 
 .back:hover {
     transition: border-color 0.2s;
     border-color: var(--secondary-hover);
+    color: var(--secondary-hover);
     background-color: transparent;
 }
 

@@ -47,7 +47,7 @@ const PasswordChangeForm = ({ userId, recoverHash }: Props) => {
     return (
         <form className={form.home} onSubmit={onSubmit}>
             <div className={form.header}>
-                <h1>Change password</h1>
+                <h1 className="text-center text-5xl text-primary">Change password</h1>
                 <hr />
                 <p className={recovery.info}>
                     This is a secure space to change your password. Do not share the link of this page with anyone else.

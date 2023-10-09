@@ -24,6 +24,7 @@ export type Project = {
     createdAt: Date;
     updatedAt: Date;
     title: string;
+    writtenBy: string;
     poster: string;
     description: string | null;
     screenplay: Prisma.JsonValue | null;
@@ -57,6 +58,7 @@ export type DataResult<T> = {
 // Data Transfer Objects
 export type ProjectCreationDTO = {
     title: string;
+    writtenBy: string;
     userId?: number;
     description?: string;
     poster?: string;

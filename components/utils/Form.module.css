@@ -8,6 +8,10 @@
     gap: 6px;
 }
 
+.heading {
+    color: var(--secondary-hover);
+}
+
 .elements {
     display: flex;
     flex-direction: column;
@@ -57,7 +61,7 @@
 .btn_flex {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .btn {
@@ -74,7 +78,7 @@
 
     /* Border */
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     border-width: 2px;
 }
 

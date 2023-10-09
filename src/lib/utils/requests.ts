@@ -38,6 +38,7 @@ export const createProject = async (
     user: CookieUser | undefined
 ): Promise<DataResult<ProjectCreated>> => {
     let body: ProjectCreationDTO = {
+        writtenBy:project.writtenBy,
         title: project.title,
         description: project.description,
         poster: project.poster,

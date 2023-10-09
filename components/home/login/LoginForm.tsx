@@ -61,35 +61,39 @@ const LoginForm = ({ verificationStatus }: Props) => {
   return (
     <form className={form.home} onSubmit={onSubmit}>
       <div className={form.header}>
-        <h1>Log in</h1>
+        <h1 className={form.heading + " text-5xl text-center"}>Log in</h1>
         <hr />
         {formInfo && <FormInfo info={formInfo} />}
       </div>
 
-      <div className={form.element}>
-        <label className={form.element}>
+      <div className="form-control">
+        <label className="input-group input-group-vertical">
           <span>Email</span>
           <input
-            className={form.input}
+            className="input input-bordered"
             name="email"
             type="email"
             onChange={resetFromInfo}
             required
           />
         </label>
+      </div>
 
-        <label className={form.element}>
+      <div className="form-control">
+        <label className="input-group input-group-vertical">
           <span>Password</span>
           <input
-            className={form.input}
+            className="input input-bordered"
             name="password"
             type="password"
             onChange={resetFromInfo}
             required
           />
-          <Link href="/recovery">Forgot password?</Link>
         </label>
       </div>
+
+      <Link href="/recovery">Forgot password?</Link>
+
 
       <div className={form.btn_flex}>
         <button className={form.btn} type="submit">

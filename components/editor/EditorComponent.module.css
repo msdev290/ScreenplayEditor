@@ -1,5 +1,39 @@
+.pre_page {
+    width: 800px;
+
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--editor-script-bg);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    transition: all ease-in-out 500ms;
+
+}
+
+.fpage_scroll_btn_container {
+    position: absolute;
+    left: 48%;
+    bottom: -15px;
+
+    border-radius: 15px;
+    transition: all 200ms;
+}
+
+.fpage_scroll_btn {
+    background-color: var(--primary);
+    border-radius: 15px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    transition: all 400ms;
+    color: var(--secondary);
+}
+
 .container {
-    aspect-ratio: 0.707; /* A4 format */
+    aspect-ratio: 0.707;
+    /* A4 format */
     width: 800px;
     height: max-content;
 

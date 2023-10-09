@@ -47,6 +47,11 @@
     border-color: var(--secondary-hover);
 }
 
+.heading {
+    color: var(--secondary);
+    font-size: xx-large;
+}
+
 .delete_img {
     height: 100%;
     width: 100%;

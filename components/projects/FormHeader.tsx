@@ -10,7 +10,7 @@ type Props = {
 const FormHeader = ({ title, formInfo }: Props) => {
     return (
         <div className={form_header.container}>
-            <h1>{title}</h1>
+            <h1 className={form_header.heading}>{title}</h1>
             <hr />
             {formInfo && <FormInfo info={formInfo} />}
         </div>

@@ -49,14 +49,23 @@ async function postMethod(userId: number, body: any, res: NextApiResponse) {
     }
 
     const title: string = body.title;
+    const writtenBy: string = body.writtenBy;
     const description: string = body.description;
 
     if (title.length < 2 || title.length > 256) {
-        return onResponseAPI(res, 400, "Title must be between 2 and 256 characters");
+        return onResponseAPI(
+            res,
+            400,
+            "Title must be between 2 and 256 characters"
+        );
     }
 
     if (description && description.length > 2048) {
-        return onResponseAPI(res, 400, "Description must be at most 2048-character long");
+        return onResponseAPI(
+            res,
+            400,
+            "Description must be at most 2048-character long"
+        );
     }
 
     let uuid = undefined;
@@ -68,6 +77,7 @@ async function postMethod(userId: number, body: any, res: NextApiResponse) {
     const created = await createProject({
         title,
         description,
+        writtenBy,
         userId,
         poster: uuid,
     });
@@ -101,11 +111,19 @@ async function patchMethod(userId: number, body: any, res: NextApiResponse) {
     }
 
     if (title && (title.length < 2 || title.length > 256)) {
-        return onResponseAPI(res, 400, "Title must be between 2 and 256 characters");
+        return onResponseAPI(
+            res,
+            400,
+            "Title must be between 2 and 256 characters"
+        );
     }
 
     if (description && description.length > 2048) {
-        return onResponseAPI(res, 400, "Description must be at most 2048-character long");
+        return onResponseAPI(
+            res,
+            400,
+            "Description must be at most 2048-character long"
+        );
     }
 
     let uuid;

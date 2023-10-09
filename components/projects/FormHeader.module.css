@@ -1,2 +1,4 @@
-.container {
+.heading {
+    color: var(--secondary);
+    font-size: xx-large;
 }

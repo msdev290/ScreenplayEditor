@@ -31,6 +31,7 @@ export class ProjectRepository {
         return prisma.project.create({
             data: {
                 title: project.title,
+                writtenBy: project.writtenBy,
                 description: project.description,
                 poster: project.poster,
                 user: {

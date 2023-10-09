@@ -34,41 +34,50 @@ const SignupForm = () => {
   return (
     <form className={form.home} onSubmit={onSubmit}>
       <div className={form.header}>
-        <h1>Sign up</h1>
+        <h1 className={form.heading + " text-5xl text-center"}>Sign up</h1>
         <hr />
         {formInfo && <FormInfo info={formInfo} />}
       </div>
 
-      <label className={form.element}>
-        <span>Email</span>
-        <input
-          className={form.input}
-          name="email"
-          type="email"
-          onChange={resetFromInfo}
-          required
-        />
-      </label>
+      <div className="form-control">
+        <label className="input-group input-group-vertical">
+          <span>Email</span>
+          <input
+            className="input input-bordered"
+            name="email"
+            type="email"
+            onChange={resetFromInfo}
+            required
+          />
+        </label>
+      </div>
 
-      <label className={form.element}>
-        <span>Password</span>
-        <input
-          className={form.input}
-          name="pwd1"
-          type="password"
-          onChange={resetFromInfo}
-          required
-        />
-        <span>Repeat password</span>
-        <input
-          className={form.input}
-          name="pwd2"
-          type="password"
-          onChange={resetFromInfo}
-          required
-        />
-      </label>
+      <div className="form-control">
+        <label className="input-group input-group-vertical">
+          <span>Password</span>
+          <input
+            className="input input-bordered"
+            name="pwd1"
+            type="password"
+            onChange={resetFromInfo}
+            required
+          />
+        </label>
 
+      </div>
+
+      <div className="form-control">
+        <label className="input-group input-group-vertical">
+          <span>Confirm Password</span>
+          <input
+            className="input input-bordered"
+            name="pwd2"
+            type="password"
+            onChange={resetFromInfo}
+            required
+          />
+        </label>
+      </div>
       <div className={form.btn_flex}>
         <button className={form.btn} type="submit">
           Sign up

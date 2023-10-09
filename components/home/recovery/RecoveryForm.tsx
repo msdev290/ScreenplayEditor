@@ -20,12 +20,15 @@ const RecoveryForm = () => {
     return (
         <form className={form.home} onSubmit={onSubmit}>
             <div className={form.header}>
-                <h1>Recover</h1>
+                <h1 className={"text-center text-5xl " + form.heading}>Recover</h1>
                 <hr />
-                <p className={join(recovery.info, "segoe")}>
-                    If the provided email is linked to an existing account, an email will be sent with a link to recover
-                    your password.
-                </p>
+                <div className="alert alert-info rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>
+                        If the provided email is linked to an existing account, an email will be sent with a link to recover
+                        your password.
+                    </span>
+                </div>
                 {sentEmail && (
                     <p className={join(recovery.info, "segoe")}>
                         The email can take few minutes to arrive. Please check your junk folder if you do not receive
@@ -35,10 +38,10 @@ const RecoveryForm = () => {
             </div>
 
             {!sentEmail && (
-                <div className={form.element}>
+                <label className="form-control">
                     <span>Email</span>
-                    <input className={form.input} name="email" type="email" required />
-                </div>
+                    <input className="input input-bordered" name="email" type="email" required />
+                </label>
             )}
 
             <div className={form.btn_flex}>

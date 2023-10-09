@@ -40,7 +40,7 @@ const ProjectPageContainer = () => {
                 <div className={page.center}>
                     <div className={page.header}>
                         <div className={page.header_info}>
-                            <h1>Projects</h1>
+                            <h1 className={page.heading}>Projects</h1>
                             <div className={page.header_btns}>
                                 <div onClick={() => setDeleteMode(!deleteMode)} className={page.delete_btn}>
                                     <TrashSVG className={page.delete_img} alt="Trash icon" />

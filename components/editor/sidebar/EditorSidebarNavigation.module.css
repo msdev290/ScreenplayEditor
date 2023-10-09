@@ -2,7 +2,11 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-
+    position: absolute;
+    /* height: fit-content; */
+    top: 2.8;
+    left: 0;
+    /* bottom: 0; */
     padding-top: 25px;
     padding-inline: 30px;
     width: var(--nav-sidebar-width);
@@ -43,6 +47,7 @@
 
 .tab:hover {
     background-color: var(--editor-style-bg-active);
+    color: var(--primary);
 }
 
 .tab.active_tab {
