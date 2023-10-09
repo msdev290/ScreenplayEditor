@@ -69,20 +69,54 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
             if (editor && e.key === "Enter") {
-                let { $from } = editor.view.state.selection;
+                let state = editor.state;
+                let anchor = state.selection.anchor;
+
+                let selection = state.selection;
+                let nodePos = selection.$head.parentOffset;
+
+                let nodeSize = selection.$anchor.parent.content.size;
+                let start =
+                    selection.$anchor.pos - selection.$anchor.parentOffset;
+                let end = start + nodeSize;
+
+                let temporaryText = state.doc.textBetween(start, end, "");
+                let result: number[] = [];
+                for (let i = 0; i < temporaryText.length; i++) {
+                    if (temporaryText[i] === "-") result.push(i);
+                }
+
+                let findStart: number | undefined = result
+                    .reverse()
+                    .find((res) => res <= nodePos);
+
+                let text =
+                    typeof findStart == "undefined"
+                        ? ""
+                        : state.doc.textBetween(start + findStart, anchor, "");
+
+                // FIND THE TEXT IN FILTERED
+                let queryLength = text.slice(1).length;
 
                 if (
                     editor.state.selection.$head.parent.attrs.class !=
-                    "scene" ||
+                        "scene" ||
                     filteredArrays.length == 0
                 ) {
                     return false;
                 }
 
+                editor.commands.deleteRange({
+                    from: anchor - queryLength,
+                    to: anchor,
+                });
                 editor
                     .chain()
                     .focus()
-                    .insertContentAt($from.pos, " " + arrays[selectedIndex])
+                    .insertContentAt(
+                        anchor - (queryLength == 0 ? 0 : queryLength),
+                        " " + filteredArrays[selectedIndex]
+                    )
                     .run();
 
                 return false;
@@ -94,7 +128,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
         return () => {
             document.removeEventListener("keydown", onKeyDown);
         };
-    }, [selectedIndex, editor, currentText, arrays]);
+    }, [selectedIndex, editor, currentText, arrays, filteredArrays]);
 
     useEffect(() => {
         setSelectedIndex(0);
@@ -160,10 +194,10 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                         typeof findStart == "undefined"
                             ? ""
                             : state.doc.textBetween(
-                                start + findStart,
-                                anchor,
-                                ""
-                            );
+                                  start + findStart,
+                                  anchor,
+                                  ""
+                              );
 
                     const myArray = arrays.filter((item) => {
                         if (text == "") return false;

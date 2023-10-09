@@ -49,7 +49,7 @@ const HomePage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{!user ? "Screenplay.INK" : "Screenplay.INK - Projects"}</title>
+        <title>{!user ? "Scriptio" : "Scriptio - Projects"}</title>
       </Head>
       <HomePageWindow user={user} />
     </>

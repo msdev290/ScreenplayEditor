@@ -8,8 +8,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
 
   /* Default values */
   --format-sidebar-width: 260px;
@@ -48,7 +48,7 @@ html.light {
   --export-project-selected: #505050;
   --primary-text: #414ac2de;
   --editor-scene: #dadada;
-  --editor-text: #0b0b0cde;
+  --editor-text: #414ac2de;
   --editor-script-bg: #ffffff;
   --editor-bg: #f0f0f0;
   --editor-sidebar: #f0f0f0;
@@ -275,7 +275,8 @@ select:focus {
   border-radius: 2px;
   width: 90px;
   background-color: #ffffff;
-  box-shadow: 0 5px 5px 0px rgb(0 0 0 / 0.1), 5px 5px 5px -5px rgb(0 0 0 / 0.1);
+  box-shadow: 0 5px 5px 0px rgb(0 0 0 / 0.1),
+    5px 5px 5px -5px rgb(0 0 0 / 0.1);
 }
 
 .scene-menu button {
@@ -294,7 +295,8 @@ select:focus {
   border-radius: 4px;
   width: 150px;
   background-color: #ffffff;
-  box-shadow: 0 5px 5px 0px rgb(0 0 0 / 0.1), 5px 5px 5px -5px rgb(0 0 0 / 0.1);
+  box-shadow: 0 5px 5px 0px rgb(0 0 0 / 0.1),
+    5px 5px 5px -5px rgb(0 0 0 / 0.1);
 }
 
 .transition-menu button {
@@ -316,10 +318,12 @@ select:focus {
 
 .tippy-sideMenu-item:hover {
   background-color: #f5f5f5;
+
 }
 
+
 .sendBtn {
-  transition: all 200ms;
+  transition: all 200ms
 }
 
 .sendBtn:hover {

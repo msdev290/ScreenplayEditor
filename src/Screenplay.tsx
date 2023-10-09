@@ -245,10 +245,7 @@ const AddComment = ({ node, editor }: { node: any; editor: Editor }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [commented, setCommented] = useState<boolean>(false);
 
-
-    console.log(editor);
-
-    const handleClick = (e) => {
+    const handleClick = (e: any) => {
         e.preventDefault();
         setIsOpen(true);
         console.log("CLICKED", isOpen);
@@ -258,23 +255,21 @@ const AddComment = ({ node, editor }: { node: any; editor: Editor }) => {
         setIsOpen(false);
     };
 
-
     const comments = node.content.content.filter((item: any) => {
         return item.marks?.length !== 0;
     });
     const [commentLength, setCommentLength] = useState<Number>(comments.length);
 
-
     useEffect(() => {
         if (comments.length) setCommented(true);
-    }, [comments])
+    }, [comments]);
 
     useEffect(() => {
         if (comments.length > commentLength) {
-            setIsOpen(true)
+            setIsOpen(true);
             setCommentLength(comments.length);
         }
-    }, [comments.length])
+    }, [comments.length]);
 
     return (
         <React.Fragment>
@@ -308,7 +303,6 @@ const AddComment = ({ node, editor }: { node: any; editor: Editor }) => {
                         close={close}
                         isOpen={isOpen}
                         comments={comments}
-
                     />
                 ) : null}
             </PopoverR>
@@ -364,7 +358,7 @@ const ContentAddComment = ({
                 transition: "all 400ms",
                 backgroundColor: "var(--primary)",
                 boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
-                borderRadius: "5px"
+                borderRadius: "5px",
             }}
         >
             <div className="overflow-hidden">
@@ -375,115 +369,112 @@ const ContentAddComment = ({
                         boxShadow: "0 2px 4px -2px rgba(0, 0, 0, 0.2)",
                         borderRadius: "5px",
                         borderBottomLeftRadius: "0",
-                        borderBottomRightRadius: "0"
+                        borderBottomRightRadius: "0",
                     }}
                 >
                     {comments.length} COMMENT{comments.length > 1 ? "S" : ""}
                 </div>
                 {comments.length !== 0
                     ? comments.map((comment, index) => {
-                        const [input, setInput] = useState<string>("");
-                        const [addcomment, setAddComment] = useState<string>('');
+                          const [input, setInput] = useState<string>("");
+                          const [addcomment, setAddComment] =
+                              useState<string>("");
 
-                        return (
-                            <div
-                                key={index}
-                                style={{
-                                    borderRadius: "8px",
-                                    padding: "0px 0px 10px 0px",
-                                    transition: "all 200ms",
+                          return (
+                              <div
+                                  key={index}
+                                  style={{
+                                      borderRadius: "8px",
+                                      padding: "0px 0px 10px 0px",
+                                      transition: "all 200ms",
+                                  }}
+                              >
+                                  <div
+                                      style={{
+                                          borderBottomLeftRadius: "0",
+                                          borderBottomRightRadius: "0",
+                                          padding: "5px 10px 3px 10px",
+                                      }}
+                                  >
+                                      <p
+                                          style={{
+                                              color: "var(--secondary)",
+                                              fontWeight: "bolder",
+                                          }}
+                                      >
+                                          Rakeshi
+                                          <i
+                                              style={{
+                                                  color: "var(--secondary-hover)",
+                                                  fontFamily: "sans-serif",
+                                                  fontSize: "0.8rem",
+                                                  paddingLeft: "40px",
+                                              }}
+                                          >
+                                              {comment?.text ?? ""}
+                                          </i>
+                                      </p>
+                                  </div>
+                                  <div
+                                      style={{
+                                          borderBottomLeftRadius: "0",
+                                          borderBottomRightRadius: "0",
+                                          padding: "5px 10px 3px 10px",
+                                      }}
+                                  >
+                                      <i
+                                          style={{
+                                              color: "var(--secondary-hover)",
+                                              fontFamily: "sans-serif",
+                                              fontSize: "0.8rem",
+                                              paddingLeft: "10px",
+                                          }}
+                                      >
+                                          {addcomment}
+                                      </i>
+                                  </div>
+                                  <div
+                                      style={{
+                                          display: "flex",
+                                          justifyContent: "space-around",
+                                          gap: "20px",
+                                          padding: "2px 10px",
+                                      }}
+                                  >
+                                      <input
+                                          type="text"
+                                          value={input}
+                                          placeholder="Type Comment here"
+                                          className="input input-ghost input-sm "
+                                          onChange={(e) =>
+                                              setInput(e.target.value)
+                                          }
+                                          autoFocus
+                                      />
 
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        borderBottomLeftRadius: "0",
-                                        borderBottomRightRadius: "0",
-                                        padding: "5px 10px 3px 10px",
-                                    }}
-                                >
-                                    <p
-                                        style={{
-                                            color: "var(--secondary)",
-                                            fontWeight: "bolder",
-                                        }}
-                                    >
-                                        Rakeshi
-
-                                        <i
-                                            style={{
-                                                color: "var(--secondary-hover)",
-                                                fontFamily: "sans-serif",
-                                                fontSize: "0.8rem",
-                                                paddingLeft: "40px"
-                                            }}
-                                        >
-                                            {comment?.text ?? ""}
-                                        </i>
-                                    </p>
-
-                                </div>
-                                <div
-                                    style={{
-                                        borderBottomLeftRadius: "0",
-                                        borderBottomRightRadius: "0",
-                                        padding: "5px 10px 3px 10px",
-                                    }}
-                                >
-
-                                    <i
-                                        style={{
-                                            color: "var(--secondary-hover)",
-                                            fontFamily: "sans-serif",
-                                            fontSize: "0.8rem",
-                                            paddingLeft: "10px"
-                                        }}
-                                    >
-                                        {addcomment}
-                                    </i>
-                                </div>
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "space-around",
-                                        gap: "20px",
-                                        padding: "2px 10px",
-                                    }}
-                                >
-                                    <input
-                                        type="text"
-                                        value={input}
-                                        placeholder="Type Comment here"
-                                        className="input input-ghost input-sm "
-                                        onChange={(e) =>
-                                            setInput(e.target.value)
-                                        }
-                                        autoFocus
-                                    />
-
-                                    <button
-                                        className="sendBtn"
-                                        style={{
-                                            boxShadow:
-                                                "0 0 10px 0 rgba(0, 0, 0, 0.2)",
-                                            backgroundColor:
-                                                "var(--secondary)",
-                                            color: "var(--primary)",
-                                            borderRadius: "20px",
-                                            padding: "3px 8px 3px 4px",
-                                            textAlign: "center",
-                                        }}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setAddComment(input);
-                                        }}
-                                    >
-                                        <BsSendPlus size={20} />
-                                    </button>
-                                </div>
-                            </div>
-                        );
-                    })
+                                      <button
+                                          className="sendBtn"
+                                          style={{
+                                              boxShadow:
+                                                  "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+                                              backgroundColor:
+                                                  "var(--secondary)",
+                                              color: "var(--primary)",
+                                              borderRadius: "20px",
+                                              padding: "3px 8px 3px 4px",
+                                              textAlign: "center",
+                                          }}
+                                          onClick={(e) => {
+                                              e.preventDefault();
+                                              setAddComment(input);
+                                          }}
+                                      >
+                                          <BsSendPlus size={20} />
+                                      </button>
+                                  </div>
+                              </div>
+                          );
+                      })
                     : null}
             </div>
         </PopoverContent>
@@ -601,12 +592,12 @@ export const Screenplay = Node.create({
         return {
             setMyNode:
                 (attributes) =>
-                    ({ commands }) => {
-                        return commands.setNode(this.name, {
-                            ...this.editor.getAttributes(this.name),
-                            class: attributes.class,
-                        });
-                    },
+                ({ commands }) => {
+                    return commands.setNode(this.name, {
+                        ...this.editor.getAttributes(this.name),
+                        class: attributes.class,
+                    });
+                },
             setAlign: (attributes) => (prop) =>
                 this.editor
                     .chain()
@@ -618,164 +609,104 @@ export const Screenplay = Node.create({
                     .run(),
             toggleAlign:
                 (attributes) =>
-                    ({ commands }) => {
-                        const { align } = this.editor.getAttributes(this.name) as {
-                            align: AttrAlign;
-                        };
+                ({ commands }) => {
+                    const { align } = this.editor.getAttributes(this.name) as {
+                        align: AttrAlign;
+                    };
 
-                        return commands.setAlign({
-                            align:
-                                align == attributes.align ? null : attributes.align,
-                        });
-                    },
+                    return commands.setAlign({
+                        align:
+                            align == attributes.align ? null : attributes.align,
+                    });
+                },
             toggleCase:
                 () =>
-                    ({ commands }) => {
-                        const node = this.editor.getAttributes(this.name);
+                ({ commands }) => {
+                    const node = this.editor.getAttributes(this.name);
 
-                        return node.class == "dialogue" || node.class == "action"
-                            ? this.editor
-                                .chain()
-                                .focus()
-                                .setNode(this.name, {
-                                    ...this.editor.getAttributes(this.name),
-                                    case: node.case ? null : "upper",
-                                })
-                                .run()
-                            : false;
-                    },
+                    return node.class == "dialogue" || node.class == "action"
+                        ? this.editor
+                              .chain()
+                              .focus()
+                              .setNode(this.name, {
+                                  ...this.editor.getAttributes(this.name),
+                                  case: node.case ? null : "upper",
+                              })
+                              .run()
+                        : false;
+                },
             toggleRevision:
                 () =>
-                    ({ commands }) => {
-                        const node = this.editor.getAttributes(this.name);
+                ({ commands }) => {
+                    const node = this.editor.getAttributes(this.name);
 
-                        return this.editor
-                            .chain()
-                            .focus()
-                            .setNode(this.name, {
-                                ...this.editor.getAttributes(this.name),
-                                revision: node.revision ? null : true,
-                            })
-                            .run();
-                    },
+                    return this.editor
+                        .chain()
+                        .focus()
+                        .setNode(this.name, {
+                            ...this.editor.getAttributes(this.name),
+                            revision: node.revision ? null : true,
+                        })
+                        .run();
+                },
             decreaseExpand:
                 () =>
-                    ({ commands }) => {
-                        const node = this.editor.getAttributes(this.name);
-                        if (!node.expand) return;
+                ({ commands }) => {
+                    const node = this.editor.getAttributes(this.name);
+                    if (!node.expand) return;
 
-                        return this.editor
-                            .chain()
-                            .focus()
-                            .setNode(this.name, {
-                                ...this.editor.getAttributes(this.name),
-                                expand:
-                                    node.expand == "2"
-                                        ? "1"
-                                        : node.expand == "1"
-                                            ? null
-                                            : "1",
-                            })
-                            .run();
-                    },
+                    return this.editor
+                        .chain()
+                        .focus()
+                        .setNode(this.name, {
+                            ...this.editor.getAttributes(this.name),
+                            expand:
+                                node.expand == "2"
+                                    ? "1"
+                                    : node.expand == "1"
+                                    ? null
+                                    : "1",
+                        })
+                        .run();
+                },
             increaseExpand:
                 () =>
-                    ({ commands }) => {
-                        const node = this.editor.getAttributes(this.name);
-                        if (node.expand == "2") return;
+                ({ commands }) => {
+                    const node = this.editor.getAttributes(this.name);
+                    if (node.expand == "2") return;
 
-                        return this.editor
-                            .chain()
-                            .focus()
-                            .setNode(this.name, {
-                                ...this.editor.getAttributes(this.name),
-                                expand:
-                                    node.expand == "1"
-                                        ? "2"
-                                        : node.expand == "2"
-                                            ? null
-                                            : "1",
-                            })
-                            .run();
-                    },
+                    return this.editor
+                        .chain()
+                        .focus()
+                        .setNode(this.name, {
+                            ...this.editor.getAttributes(this.name),
+                            expand:
+                                node.expand == "1"
+                                    ? "2"
+                                    : node.expand == "2"
+                                    ? null
+                                    : "1",
+                        })
+                        .run();
+                },
         };
     },
     // @ts-ignore
     addKeyboardShortcuts() {
         return {
             Enter: () => {
-                // const anchorPosition = this.editor.state.selection.$anchor.pos;
-                // const node = selection.$anchor.parent;
-                // const nodeSize = node.content.size;
                 const selection = this.editor.state.selection;
-                const nodeSize = selection.$anchor.parent.content.size;
-                const nodePos = selection.$head.parentOffset;
-                const pos = selection.anchor;
                 const currentNode = selection.$anchor.parent.attrs.class;
-                const cursorAtTheLast = nodePos == nodeSize;
 
-                const endPos = pos + nodeSize;
-
-                if (currentNode == "scene" || currentNode == "transition") {
-                    return true;
-                }
-
-                if (!cursorAtTheLast) {
-                    // default
-                    return false;
-                }
-
-                if (currentNode == "dialogue") {
-                    if (nodeSize == 0) {
-                        this.editor
-                            .chain()
-                            .insertContentAt(
-                                endPos + 1,
-                                '<p class="character"></p>',
-                                { updateSelection: true }
-                            )
-                            .focus(endPos + 1)
-                            .run();
-
-                        return true;
-                    }
-
-                    this.editor
-                        .chain()
-                        .insertContentAt(pos, `<p class="character"></p>`, {
-                            updateSelection: true,
-                        })
-                        .focus(pos)
-                        .run();
-                    return true;
-                } else if (
+                if (
+                    currentNode == "scene" ||
+                    currentNode == "transition" ||
                     currentNode == "character" ||
-                    currentNode == "parenthetical"
+                    currentNode == "dialogue"
                 ) {
-                    if (nodeSize == 0) {
-                        this.editor
-                            .chain()
-                            .insertContentAt(
-                                endPos + 1,
-                                '<p class="dialogue"></p>',
-                                { updateSelection: true }
-                            )
-                            .focus(endPos + 1)
-                            .run();
-
-                        return true;
-                    }
-                    this.editor
-                        .chain()
-                        .insertContentAt(pos, `<p class="dialogue"></p>`, {
-                            updateSelection: true,
-                        })
-                        .focus(pos)
-                        .run();
                     return true;
                 }
 
-                // Default
                 return false;
             },
             "Mod-1": () => this.editor.commands.setMyNode({ class: tabs[0] }),
@@ -787,6 +718,7 @@ export const Screenplay = Node.create({
             "Mod-7": () => this.editor.commands.setMyNode({ class: tabs[7] }),
             "Mod-8": () => this.editor.commands.setMyNode({ class: tabs[8] }),
             "Mod-9": () => this.editor.commands.setMyNode({ class: tabs[6] }),
+
             "Alt-c": () => this.editor.commands.setMyNode({ class: tabs[2] }),
             "Alt-d": () => this.editor.commands.setMyNode({ class: tabs[4] }),
             "Alt-p": () => this.editor.commands.setMyNode({ class: tabs[3] }),
@@ -801,8 +733,10 @@ export const Screenplay = Node.create({
                 this.editor
                     .chain()
                     .focus()
-                    .toggleHighlight({ color: "#ffcc00" }),
-            "Mod-l": () => this.editor.chain().focus().setColor("#ffcc00"),
+                    .toggleHighlight({ color: "#ffcc00" })
+                    .run(),
+            "Mod-l": () =>
+                this.editor.chain().focus().setColor("#ffcc00").run(),
             "Mod-]": () => this.editor.chain().toggleRevision(),
             "Mod-[": () => this.editor.chain().toggleRevision(),
             "Mod-Alt-[": () => this.editor.chain().decreaseExpand(),

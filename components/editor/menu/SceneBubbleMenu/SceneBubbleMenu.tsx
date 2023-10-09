@@ -17,12 +17,65 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
         (item) => item.toLowerCase().indexOf(currentText.toLowerCase()) === 0
     );
 
+    const hypeSuggestions = [
+        "DAY",
+        "NIGHT",
+        "AFTERNOON",
+        "MORNING",
+        "EVENING",
+        "LATER",
+        "MOMENTS LATER",
+        "CONTINUOUS",
+        "SAME TIME",
+    ];
+
+    const [hypenArrays, setHypenArrays] = useState<string[]>(hypeSuggestions);
+
+    useEffect(() => {
+        if (editor) {
+            let state = editor.state;
+            let anchor = state.selection.anchor;
+
+            let selection = state.selection;
+            let nodePos = selection.$head.parentOffset;
+
+            let nodeSize = selection.$anchor.parent.content.size;
+            let start = selection.$anchor.pos - selection.$anchor.parentOffset;
+            let end = start + nodeSize;
+
+            let temporaryText = state.doc.textBetween(start, end, "");
+            let result: number[] = [];
+            for (let i = 0; i < temporaryText.length; i++) {
+                if (temporaryText[i] === "-") result.push(i);
+            }
+
+            let findStart: number | undefined = result
+                .reverse()
+                .find((res) => res <= nodePos);
+
+            let text =
+                typeof findStart == "undefined"
+                    ? ""
+                    : state.doc.textBetween(start + findStart, anchor, "");
+
+            const filteredArrays = hypeSuggestions.filter((item) => {
+                if (text == "") return false;
+
+                return (
+                    item.toLowerCase().indexOf(text.toLowerCase().slice(1)) ===
+                    0
+                );
+            });
+
+            setHypenArrays(filteredArrays);
+        }
+    }, [editor, currentText]);
+
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
             if (editor && e.key === "Enter") {
                 let selection = editor.state.selection;
-                let { $from, to, anchor } = selection;
-                let text = editor.state.doc.textBetween(anchor - 1, anchor, "");
+                let { $from, to } = selection;
 
                 let nodeSize = selection.$anchor.parent.content.size;
                 let nodePos = selection.$head.parentOffset;
@@ -32,7 +85,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                 if (
                     editor.state.selection.$head.parent.attrs.class !=
                         "scene" ||
-                    text == "-"
+                    hypenArrays.length != 0
                 ) {
                     return false;
                 }
@@ -48,7 +101,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                     // console.log("test 1");
                     editor
                         .chain()
-                        .insertContentAt($from.pos, `<p class="action"></p>`)
+                        .insertContentAt($from.pos, `<p class="action"> </p>`)
                         .focus($from.pos)
                         .run();
                     return false;
@@ -70,7 +123,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                     // console.log("test 3");
                     editor
                         .chain()
-                        .insertContentAt($from.pos, `<p class="action"></p>`)
+                        .insertContentAt($from.pos, `<p class="action"> </p>`)
                         .focus($from.pos)
                         .run();
                     return false;
@@ -110,7 +163,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                             .chain()
                             .insertContentAt(
                                 $from.pos,
-                                `<p class="action"></p>`
+                                `<p class="action"> </p>`
                             )
                             .focus($from.pos)
                             .run();
@@ -128,7 +181,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
         return () => {
             document.removeEventListener("keydown", onKeyDown);
         };
-    }, [selectedIndex, editor, currentText]);
+    }, [selectedIndex, editor, currentText, hypenArrays]);
 
     useEffect(() => {
         setSelectedIndex(0);

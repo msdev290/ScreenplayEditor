@@ -92,6 +92,8 @@ const EditorAndSidebar = ({ project }: Props) => {
     const [isItalic, setIsItalic] = useState<boolean>(false);
     const [isUnderline, setIsUnderline] = useState<boolean>(false);
 
+    const [selectedIdx, setSelectedIdx] = useState<number>(0);
+
     const save = async () => {
         if (userCtx.saveStatus !== SaveStatus.SAVED) {
             userCtx.updateSaveStatus(SaveStatus.SAVING);
@@ -166,10 +168,15 @@ const EditorAndSidebar = ({ project }: Props) => {
         }
         updatePreviousElement(elementAnchor);
 
-        // Autocompletion
+        // // Autocompletion
         if (elementAnchor === "character") {
             const nodeSize: number = nodeAnchor.content.size;
             const cursorInNode: number = anchor.parentOffset;
+
+            const test = anchor.pos - anchor.parentOffset;
+
+            let cursorAtTheLast = cursorInNode == nodeSize;
+
             const cursor: number = anchor.pos;
             const pagePos = editor.view.coordsAtPos(cursor);
 
@@ -197,13 +204,13 @@ const EditorAndSidebar = ({ project }: Props) => {
                     .slice(0, 5);
             }
 
-            displaySuggestions(list, {
-                position: { x: pagePos.left, y: pagePos.top },
-                cursor,
-                cursorInNode,
-            });
-        } else if (elementAnchor === "scene") {
-            // TODO: Autocompletion for scenes
+            if (nodeSize !== 0) {
+                displaySuggestions(list, {
+                    position: { x: pagePos.left, y: pagePos.top },
+                    cursor,
+                    cursorInNode,
+                });
+            }
         }
 
         // Updating format marks
@@ -373,6 +380,72 @@ const EditorAndSidebar = ({ project }: Props) => {
         }
 
         if (editorView) {
+            const suggestion = suggestions[selectedIdx]?.slice(
+                suggestionData.cursorInNode
+            );
+
+            const selection = editorView.state.selection;
+            const currentNode = selection.$anchor.parent.attrs.class;
+            const nodeSize = selection.$anchor.parent.content.size;
+            const nodePos = selection.$head.parentOffset;
+            const cursorAtTheLast = nodePos == nodeSize;
+            const pos = editorView.state.selection.anchor;
+
+            // logic Enter scene transition ,character ,dialogue are here and scene, transtion at their BubbleMenu
+            if (e.key === "Enter") {
+                if (currentNode === "character") {
+                    if (!suggestion) {
+                        if (cursorAtTheLast || nodeSize == 0) {
+                            editorView
+                                .chain()
+                                .insertContentAt(
+                                    pos + 1,
+                                    `<p class="dialogue"></p>`,
+                                    {
+                                        updateSelection: true,
+                                    }
+                                )
+                                .focus(pos)
+                                .run();
+                        } else {
+                            editorView.commands.splitBlock();
+                        }
+                    }
+                } else if (currentNode === "dialogue") {
+                    if (cursorAtTheLast || nodeSize == 0) {
+                        editorView
+                            .chain()
+                            .insertContentAt(
+                                pos + 1,
+                                `<p class="character"></p>`,
+                                {
+                                    updateSelection: true,
+                                }
+                            )
+                            .focus(pos)
+                            .run();
+                    } else {
+                        editorView.commands.splitBlock();
+                    }
+                } else if (currentNode === "parenthetical") {
+                    if (cursorAtTheLast || nodeSize == 0) {
+                        editorView
+                            .chain()
+                            .insertContentAt(pos, `<p class="dialogue"></p>`, {
+                                updateSelection: true,
+                            })
+                            .focus(pos)
+                            .run();
+                    } else {
+                        editorView
+                            .chain()
+                            .insertContentAt(pos - 1, "")
+                            .focus(pos)
+                            .run();
+                    }
+                }
+            }
+
             if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
                 // toggle focus editor
                 if (e.key.toLowerCase() === "d") {
@@ -558,6 +631,8 @@ const EditorAndSidebar = ({ project }: Props) => {
                     suggestions={suggestions}
                     suggestionData={suggestionData}
                     pasteTextAt={pasteTextAt}
+                    selectedIdx={selectedIdx}
+                    setSelectedIdx={setSelectedIdx}
                 />
             )}
             {userCtx.popup}
